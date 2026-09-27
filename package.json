@@ -1,0 +1,22 @@
+{
+  "name": "to-do",
+  "version": "1.0.0",
+  "description": "this is a my project using javascript, express,mongodb",
+  "keywords": [
+    "todo",
+    "CRUD"
+  ],
+  "license": "ISC",
+  "author": "Niraj Bhatta",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.10.2",
+    "nodemon": "^3.1.14"
+  }
+}
