@@ -12,6 +12,18 @@ mongoose.connect(connectionUrl)
 .catch((error)=>console.log(error.message));
 
 
+const todoSchema = mongoose.Schema(
+    {
+        title: {type: String},
+        desc : String
+    },
+    {
+        timestamp : true
+    }
+)
+
+const Todo = mongoose.Schema("todo",todoSchema)
+
 //view engine
 app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,"public")));
