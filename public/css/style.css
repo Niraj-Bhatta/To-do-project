@@ -1,0 +1,212 @@
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Page */
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #333;
+  min-height: 100vh;
+  padding: 50px 20px;
+}
+
+/* Main container */
+.table-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Heading */
+.todo-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+/* Add Todo button */
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  background: #2563eb;
+  color: white;
+  padding: 9px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+/* Button hover */
+.btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+/* Table header */
+th {
+  background: #f1f5f9;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+/* Table cells */
+td {
+  padding: 15px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+/* Row hover */
+tr:hover td {
+  background: #f8fafc;
+}
+
+/* Action buttons */
+td .btn {
+  margin-right: 6px;
+  padding: 7px 12px;
+  font-size: 13px;
+}
+
+/* Edit button */
+td .btn:first-child {
+  background: #16a34a;
+}
+
+td .btn:first-child:hover {
+  background: #15803d;
+}
+
+/* Delete button */
+td .btn:last-child {
+  background: #dc2626;
+}
+
+td .btn:last-child:hover {
+  background: #b91c1c;
+}
+
+.new-todo {
+  width: 100%;
+  max-width: 600px;
+  margin: 25px auto;
+}
+
+.new-todo .form-group {
+  margin-bottom: 20px;
+}
+
+.new-todo label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.new-todo input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.new-todo input[type="text"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
+}
+
+.new-todo input[type="text"]::placeholder {
+  color: #999;
+}
+
+.new-todo .form-group:last-child {
+  margin-top: 10px;
+}
+
+.upate-todo {
+  width: 100%;
+  max-width: 600px;
+  margin: 25px auto;
+}
+
+.upate-todo .form-group {
+  margin-bottom: 20px;
+}
+
+.upate-todo label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.upate-todo input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.upate-todo input[type="text"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
+}
+
+.upate-todo input[type="text"]::placeholder {
+  color: #999;
+}
+
+.upate-todo .form-group:last-child {
+  margin-bottom: 0;
+}
+/* Mobile responsive */
+@media (max-width: 768px) {
+  body {
+    padding: 20px 10px;
+  }
+
+  .table-container {
+    padding: 20px 15px;
+    overflow-x: auto;
+  }
+
+  .todo-title {
+    font-size: 24px;
+  }
+
+  table {
+    min-width: 750px;
+  }
+}
+
