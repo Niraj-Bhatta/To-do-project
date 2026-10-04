@@ -15,7 +15,8 @@ mongoose.connect(connectionUrl)
 
 const todoSchema = mongoose.Schema(
     {
-        title: {type: String,required : true},
+        title: {type: String,required : true, required: true,unique : true , max_length : 20 , min_length: 3, trim: true
+        },
         desc : {type:String}
     },
     {
@@ -72,7 +73,7 @@ app.post("/add-todo",async (req,res,next)=>{
 try{
    const {title,desc} =req.body;
    if(!title){
-    res.status(400).json({message :"Title is required Field"})
+   return res.status(400).json({message :"Title is required Field"})
    }
 
    const newTodo= new Todo({title,desc});

@@ -94,6 +94,7 @@ td .btn {
 /* Edit button */
 td .btn:first-child {
   background: #16a34a;
+  margin-bottom: 10px;
 }
 
 td .btn:first-child:hover {
