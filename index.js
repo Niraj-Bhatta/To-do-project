@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path= require("path");
 const bodyParser =require("body-parser");
+const moment = require("moment");
 const PORT =8000;
 
 //init app
@@ -35,6 +36,8 @@ app.use(bodyParser.urlencoded({extended : true}))
 app.get("/",async (req,res,next)=>{
     try{
         const todos = await Todo.find({}).sort({createdAt : -1});
+
+        res.locals.momentUse =moment;
         res.render("index",{title:"List to do",todos});
 
     }catch(error){
