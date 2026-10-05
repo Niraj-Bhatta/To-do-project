@@ -2,7 +2,7 @@ const express = require("express");
 const path= require("path");
 const bodyParser =require("body-parser");
 const connectMongodb =require("./init/mongodb");
-const Router = require("./routes/todo")
+const Router = require("./routes/todo");
 const PORT =8000;
 
 //init app

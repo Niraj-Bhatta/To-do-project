@@ -1,29 +1,13 @@
 const express =require("express");
 const Todo =require("../models/Todo");
-const router =express.Router()
-const moment = require("moment")
+const router =express.Router();
 
-router.get("/",async (req,res,next)=>{
-    try{
-        const todos = await Todo.find({}).sort({createdAt : -1});
+const {homeController,addTodoFormController} = require("../controllers/todo");
 
-        res.locals.momentUse =moment;
-        res.render("index",{title:"List to do",todos});
+router.get("/", homeController)
 
-    }catch(error){
-        res.status(500).json({message:error.message});
 
-    }
-})
-
-router.get("/add-todo",(req,res,next)=>{
-    try{
-        res.render("newtodo",{title:"add to do"});
-
-    }catch(error){
-        res.status(500).json({message:error.message});
-    }
-})
+router.get("/add-todo",addTodoFormController)
 
 router.get("/update",(req,res,next)=>{
     try{
