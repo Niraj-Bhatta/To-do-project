@@ -1,24 +1,7 @@
-const express = require("express");
-const path= require("path");
-const bodyParser =require("body-parser");
-const connectMongodb =require("./init/mongodb");
-const Router = require("./routes/todo");
+const app =require("./app")
 const PORT =8000;
 
-//init app
-const app =express();
 
-connectMongodb();
-
-
-//view engine
-app.set("view engine","ejs");
-app.use(express.static(path.join(__dirname,"public")));
-app.use(bodyParser.urlencoded({extended : true}))
-
-app.use("/", Router)
-
-//listen server
 
 app.listen(PORT , ()=>{
     console.log(`server is running on ${PORT}`);
