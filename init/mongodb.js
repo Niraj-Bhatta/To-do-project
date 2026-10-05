@@ -1,14 +1,18 @@
 const mongoose = require("mongoose");
 
-const connectionUrl = "mongodb://localhost:27017/todoDb";
+const dotenv =require("dotenv");
+
+dotenv.config();
+
+const Url_here =process.env.connectionUrl
 
 const connectMongodb=async ()=>{
     try{
-       await mongoose.connect(connectionUrl);
+       await mongoose.connect(Url_here);
        console.log("database connection successful")
         
     }catch(error){
-        res.status(400).json({message:"COnnection failure"});
+        console.log(error.message);
         process.exit(1)
     }
 }
