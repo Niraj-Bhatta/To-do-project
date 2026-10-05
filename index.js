@@ -1,9 +1,9 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const path= require("path");
 const bodyParser =require("body-parser");
 const moment = require("moment");
 const connectMongodb =require("./init/mongodb");
+const todoSchema = require("./models/Todo");
 const PORT =8000;
 
 //init app
@@ -11,18 +11,6 @@ const app =express();
 
 connectMongodb();
 
-const todoSchema = mongoose.Schema(
-    {
-        title: {type: String,required : true, required: true,unique : true , max_length : 20 , min_length: 3, trim: true
-        },
-        desc : {type:String}
-    },
-    {
-        timestamps : true
-    }
-)
-
-const Todo = mongoose.model("todo",todoSchema)
 
 //view engine
 app.set("view engine","ejs");
