@@ -1,83 +1,119 @@
-const Todo =require("../models/Todo");
-const moment=require("moment");
+const Todo = require("../models/Todo");
+const moment = require("moment");
 
-const homeController = async (req,res,next)=>{
-    try{
-        const todos = await Todo.find({}).sort({createdAt : -1});
+const homeController = async (req, res, next) => {
+  try {
+    const todos = await Todo.find({}).sort({ createdAt: -1 });
 
-        res.locals.momentUse =moment;
-        res.render("index",{title:"List to do",todos});
-
-    }catch(error){
-        res.status(500).json({message:error.message});
-
-    }}
-
-const addTodoFormController =(req,res,next)=>{
-    try{
-        res.render("newtodo",{title:"add to do"});
-
-    }catch(error){
-        res.status(500).json({message:error.message});
-    }}
-
-
-    const updateTodoFormController =async(req,res,next)=>{
-    try{
-        const {id} = req.query;
-        const todo = await Todo.findById(id);
-        res.render("update",{title:"Update to do",todo});
-
-    }catch(error){
-        res.status(500).json({message: error.message}) ;   }
-}
-
-const deleteTodoFormController = (req,res,next)=>{
-    try{
-        const {id} =req.query;
-        res.render("delete",{title:"update to-do",id});
-
-    }catch(error){
-        res.status(500).json({message : error.message});
-    }
-}
-
-
-const enhance =async (req,res,next)=>{
-try{
-   const {title,desc} =req.body;
-   if(!title){
-   return res.status(400).json({message :"Title is required Field"})
-   }
-
-   const newTodo= new Todo({title,desc});
-   await newTodo.save();
-
-   res.redirect("/");
-
-}catch(error){
-    res.status(500).json({message: error.message})
-}
+    res.locals.momentUse = moment;
+    res.render("index", { title: "List to do", todos });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
-const updateTodoController = async (req,res,next) =>{
-    try{
-const {id} = req.params;
-const {title,desc} =req.body;
+const addTodoFormController = (req, res, next) => {
+  try {
+    res.render("newtodo", { title: "add to do" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-const todo =await Todo.findById(id);
-if(!todo){
-    return res.status(404).json({message : "todo not found"})
-}
+const updateTodoFormController = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    const todo = await Todo.findById(id);
+    res.render("update", { title: "Update to do", todo });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-todo.title =title;
-todo.desc = desc;
+const deleteTodoFormController = (req, res, next) => {
+  try {
+    const { id } = req.query;
+    res.render("delete", { title: "update to-do", id });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-await todo.save();
-
-res.redirect("/");
-    }catch(error){
-res.status(500).json({message: error.message})
+const enhance = async (req, res, next) => {
+  try {
+    const { title, desc } = req.body;
+    if (!title) {
+      return res.status(400).json({ message: "Title is required Field" });
     }
-}
-    module.exports = {homeController, addTodoFormController, updateTodoFormController,deleteTodoFormController, enhance,updateTodoController};
+
+    const newTodo = new Todo({ title, desc });
+    await newTodo.save();
+
+    res.redirect("/");
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const updateTodoController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { title, desc } = req.body;
+
+    const todo = await Todo.findById(id);
+    if (!todo) {
+      return res.status(404).json({ message: "todo not found" });
+    }
+
+    todo.title = title;
+    todo.desc = desc;
+
+    await todo.save();
+
+    res.redirect("/");
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const confirmDeleteController = async (req, res, next) => {
+  try {
+    const { id, confirm } = req.query;
+
+    if (!id) {
+      return res.status(400).json({
+        message: "Todo ID is required",
+      });
+    }
+
+    if (confirm !== "yes") {
+      return res.redirect("/");
+    }
+
+    const deletedTodo = await Todo.findByIdAndDelete(id);
+
+    if (!deletedTodo) {
+      return res.status(404).json({
+        message: "Todo not found",
+      });
+    }
+
+    console.log("Deleted:", deletedTodo);
+
+    return res.redirect("/");
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+module.exports = {
+  homeController,
+  addTodoFormController,
+  updateTodoFormController,
+  deleteTodoFormController,
+  enhance,
+  updateTodoController,
+  confirmDeleteController
+};
